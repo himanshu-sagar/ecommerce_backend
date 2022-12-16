@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 from pathlib import Path
 import os
+from datetime import timedelta
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -21,7 +22,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-37*x+*4v%7s$*0*f^dzo=p3p4=b*i^ebcgx@ybb!h&m3_0^lhr'
 SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'authentication',
     'rest_framework',
     'rest_framework_simplejwt',
+    'products'
 ]
 
 MIDDLEWARE = [
@@ -140,3 +141,8 @@ REST_FRAMEWORK = {
 }
 
 AUTH_USER_MODEL = 'authentication.User'
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(hours=24),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=30),
+}

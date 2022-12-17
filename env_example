@@ -1,0 +1,9 @@
+SECRET_KEY = ''
+
+HOST = ''
+
+PORT = ''
+
+POSTGRES_USER = ''
+
+POSTGRES_PASSWORD = ''

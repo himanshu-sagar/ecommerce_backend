@@ -5,7 +5,9 @@ from .models import User
 
 
 class UserSerializer(serializers.ModelSerializer):
-    confirm_password = serializers.CharField(style={'input_type': 'password'}, write_only=True)
+    confirm_password = serializers.CharField(
+        style={'input_type': 'password'}, write_only=True
+    )  # only used for password validation
 
     class Meta:
         model = User
@@ -26,6 +28,6 @@ class UserSerializer(serializers.ModelSerializer):
             last_name=validated_data['last_name'],
             phone_no=validated_data['phone_no'],
         )
-        user.set_password(validated_data['password'])
+        user.set_password(validated_data['password'])  # Set password for the user after encoding it with hash function
         user.save()
         return user

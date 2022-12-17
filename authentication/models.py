@@ -1,11 +1,12 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
-from django.utils.translation import gettext_lazy as _
-from django.conf import settings
 from datetime import date
 
 
 class User(AbstractUser):
+    """
+    Creating custom user model for making email as default username field
+    """
     username = models.CharField(max_length=50, unique=True, null=False)
     email = models.EmailField(
         verbose_name='email address',

@@ -10,14 +10,13 @@ from products.serializers import ProductSerializer, Product
 
 
 class OrderAPIView(APIView):
-    permission_classes = (IsAuthenticated, )
+    permission_classes = (IsAuthenticated, )  # Only authenticated user can make an order
 
     def post(self, request, format=None):
-        # Validate the order data
         data = request.data
-        user = request.user
+        user = request.user  # fetch user from request
 
-        total_amount = 0
+        total_amount = 0  # total price of all items in an order
 
         order_items_data = request.data.get('items', [])
         for item_data in order_items_data:
@@ -48,6 +47,7 @@ class OrderAPIView(APIView):
             # Decrease the product quantity and save the order item
             product.quantity -= item_data['quantity']
             product.save()
+
             item_data["order_id"] = order.order_id
 
             item_serializer = OrderItemSerializer(data=item_data)
